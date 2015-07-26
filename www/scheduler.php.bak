@@ -20,7 +20,7 @@
 		require_once("../classes/db.class.php");
 		/* Instantiate DB Class */
 		$db = new db();
-		/* Get all Category names for the catSelect Selection list where NOT deleted*/
+		/* Get all Categorynames for the catSelect Selection list where NOT deleted*/
 			$catQ = $db->q('SELECT `id`, `categoryName` FROM `categories` 	
 							WHERE status = 1 ORDER BY `categoryName` ASC'); /* Get all Hostnames for the deviceSelect Selection list where NOT deleted*/ 
 			
@@ -131,7 +131,7 @@
 						<div class="spacer">
 						</div>
 						<div id="chooseCatDiv">
-							<label>Choose category: <?php	// echo error message if is sent back in GET from CRUD
+							<label>Choose category <?php	// echo error message if is sent back in GET from CRUD
 							if(isset($errors['catId'])){echo "<span class=\"error\">".$errors['catId']."</span>";} ?>
 						</label>
 							<select name="catId" id="catId" onchange="changeType()" tabindex='2'>
@@ -141,7 +141,7 @@
 							</div>
 						</div>
 						<div id="catCommandDiv" style="display:none;">
-							<label>Choose command: <?php	// echo error message if is sent back in GET from CRUD
+							<label>Choose command <?php	// echo error message if is sent back in GET from CRUD
 							if(isset($errors['catCommand'])){echo "<span class=\"error\">".$errors['catCommand']."</span>";} ?>
 						</label>
 							<select name="catCommand" id="catCommand" tabindex='3'>

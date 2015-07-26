@@ -290,6 +290,33 @@ class MySQLDB
       $this->calcNumActiveGuests();
    }
    
+   function checkLdapServer(){
+		
+		$q = "SELECT ldapServer FROM settings WHERE id = 1";
+		$result = mysql_query($q, $this->connection);
+		if(!$result || (mysql_numrows($result) < 1)){
+         return 1; //Indicates LDAP server lookup failure
+		}
+		
+		$dbarray = mysql_fetch_array($result);
+		$dbarray['ldapServer'] = stripslashes($dbarray['ldapServer']);
+		
+		if(!empty($dbarray['ldapServer'])){
+			return 0; //LDAP server is set
+		}
+		else{
+			return 2; //LDAP server has not been set
+		}
+	}
+   
+   function getLdapServer(){
+		$q = "SELECT ldapServer FROM settings WHERE id = 1";
+		$result = mysql_query($q, $this->connection);
+		$dbarray = mysql_fetch_array($result);
+		$dbarray['ldapServer'] = stripslashes($dbarray['ldapServer']);
+		return $dbarray['ldapServer'];
+	}
+   
    /**
     * query - Performs the given query on the database and
     * returns the result, which may be false, true or a

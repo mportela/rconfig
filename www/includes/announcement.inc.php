@@ -79,6 +79,12 @@
 				case "updater.php":
 					echo "Update rConfig on this page";
 					break;
+				case "templategen.php":
+					echo "Config Template Generator";
+					break;
+				case "templategenconfig.php":
+					echo "New Template-Based Generated Configs";
+					break;
 				default:
 					echo "Page Title Not Found";
 			}

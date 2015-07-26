@@ -47,6 +47,8 @@ if (php_sapi_name() == 'cli') {  // if invoked from CLI
 // set vars passed from ajaxConfigDevice.php on require()
 $rid = $passedRid;
 $snipId = $passedSnipId;
+$providedUsername = $passedUsername;
+$providedPassword = $passedPassword;
 
 // Log the script start
 $log->Info("The ".$_SERVER['PHP_SELF']." script was run manually invoked with Router ID: $rid & Snippet ID: $snipId "); // logg to file
@@ -98,9 +100,13 @@ if($result = $db->q($getNodesSql)) {
 		echo json_encode($jsonArray);
 		continue;
 	}
-		
-	// create the connection by calling the connection class
-	$conn = new Connection($device['deviceIpAddr'], $device['deviceUsername'], $device['devicePassword'], $device['deviceEnableMode'], $device['deviceEnablePassword'], $device['connPort'], $timeout);
+	
+	if (!empty($providedUsername) && !empty($providedPassword) && $providedUsername != "0" && $providedPassword != "0"){
+		$conn = new Connection($device['deviceIpAddr'], $providedUsername, $providedPassword, $device['deviceEnableMode'], $providedPassword, $device['connPort'], $timeout);	
+	}else{
+		// create the connection by calling the connection class
+		$conn = new Connection($device['deviceIpAddr'], $device['deviceUsername'], $device['devicePassword'], $device['deviceEnableMode'], $device['deviceEnablePassword'], $device['connPort'], $timeout);	
+	}
 	
 	// get the config snippet data from the DB
 	$cmdsSql = $db->q("SELECT * FROM snippets WHERE id = ".$snipId);

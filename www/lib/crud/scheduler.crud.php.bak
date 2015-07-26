@@ -9,6 +9,8 @@ require_once("../../../classes/phpmailer/class.phpmailer.php");
 $db  = new db();
 $log = ADLog::getInstance();
 
+// echo '<pre>';
+// print_r($_POST]);die();
 /* Add tasks Here */
 if (isset($_POST['add'])) {
     session_start();
@@ -327,7 +329,6 @@ if (isset($_POST['add'])) {
 		// Send out notification iCal email to user
 		$q = $db->q("SELECT smtpServerAddr, smtpFromAddr, smtpRecipientAddr, smtpAuth, smtpAuthUser, smtpAuthPass FROM settings");
 		
-		// Pull SMTP settings from MySQL database
 		$result = mysql_fetch_assoc($q);
 		$smtpServerAddr = $result['smtpServerAddr'];
 		$smtpFromAddr = $result['smtpFromAddr'];
@@ -338,10 +339,8 @@ if (isset($_POST['add'])) {
 			$smtpAuthPass = $result['smtpAuthPass'];	
 		}
 
-		// Instantiate new instance of PHPMailer for sending email using PHP
 		$mail = new PHPMailer();
 		
-		// Sets subject field for email
 		$subject = "rConfig Snippet ".$taskDescription." reminder";
 
 		$mail->IsSMTP(); // telling the class to use SMTP
@@ -359,15 +358,15 @@ if (isset($_POST['add'])) {
 		$mail->Subject = $subject;
 		$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 		
-		// Get the posts from the cron form and trim
-		// This is done above already, so unsure if still needed
+		//$body = file_get_contents($report);
+		//$body = 'Test mail from rConfig';
+		//$body = eregi_replace("[\]",'',$body);
+		//********************
+		
 		$minute = trim($_POST['minute']);
 		$hour = trim($_POST['hour']);
 		$day = trim($_POST['day']);
-		$month = trim($_POST['month']);
-		$weekday = trim($_POST['weekday']);
 		
-		// Not currently used
 		if ($month == 1){
 			$monthName = "January";
 		}else if ($month == 2){
@@ -396,7 +395,6 @@ if (isset($_POST['add'])) {
 			$monthName = "Any Month";
 		}
 		
-		// Not currently used
 		if ($weekday == 0){
 			$weekdayName = "Sunday";
 		}else if ($weekday == 1){
@@ -415,58 +413,92 @@ if (isset($_POST['add'])) {
 			$weekdayName = "Any Weekday";
 		}
 		
-		// TODO: Need to add unique business domain here, referenced from settings page?
-		$domain = "angieslist.com";
+		/////ical
+		//		$domain = 'angieslist.com'; // Need to replace this with Database pull, user configured setting option
 		
-		// If the month is January through September, the iCal timestamp formats require a leading zero (0)
-		if ($month < 10){
-			$month = "0".$month;
-		}
+//		$mime_boundary = "----rConfig Snippet Meeting----".MD5(TIME());
 		
-		$from = "rconfig@$domain";
-		$dtstart = date("Y").$month.$day."T".$hour.$minute."00"; // Date and timestamp in local time when the event starts.  To make it UTC, add a "Z" at the end (Ex: ...$minute."00Z";)
-		$dtend = date("Y").$month.$day."T".$hour.$minute."00"; // Date and timestamp in local time when the event ends.  To make it UTC, add a "Z" at the end (Ex: ...$minute."00Z";)
-		$location = "Automatic"; // Location of meeting, can be anything
-		$summary = "Event reminder for rConfig snippet"; // Text in body of email sent
+//		$headers = "From: rConfig <"$result['smtpFromAddr'];">\r\n";
+//		$headers .= "Reply-To: rConfig <"$result['smtpFromAddr'];">\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/calendar; method=REQUEST; charset=UTF-8\r\n";
+		$headers .= "Content-class: urn:content-classes:calendarmessage\r\n";
 		
-		// Format required for iCal event in Outlook
-		$vcal = "BEGIN:VCALENDAR\r\n";
-		$vcal .= "VERSION:2.0\r\n";
-		$vcal .= "PRODID:-//$domain//OrgCalendarWebTool//EN\r\n"; 
-		$vcal .= "METHOD:REQUEST\r\n";
-		$vcal .= "BEGIN:VEVENT\r\n";
-		$vcal .= "ORGANIZER;CN=\"rConfig\":mailto:$smtpFromAddr\r\n"; 
-		$vcal .= "UID:".date('Ymd')."T".date('His')."-".rand()."-$domain\r\n"; // TODO: Need to add unique business domain here
-		$vcal .= "DTSTAMP:".date('Ymd')."T".date('His')."\r\n";
-		$vcal .= "DTSTAMP:$dtstart\r\n";
-		$vcal .= "DTSTART:$dtstart\r\n";
-		$vcal .= "DTEND:$dtend\r\n";
-		$vcal .= "LOCATION:$location\r\n";
-		$vcal .= "SUMMARY:$summary\r\n";
-		$vcal .= "DESCRIPTION:Entry for snippet event\r\n";
-		$vcal .= "BEGIN:VALARM\r\n";
-		$vcal .= "TRIGGER:-PT15M\r\n";
-		$vcal .= "ACTION:DISPLAY\r\n";
-		$vcal .= "DESCRIPTION:Reminder\r\n";
-		$vcal .= "END:VALARM\r\n";
-		$vcal .= "END:VEVENT\r\n";
-		$vcal .= "END:VCALENDAR\r\n";
-	 
-		// Headers needed for sending the email correctly
-		$headers = "From: $from\r\nReply-To: $from"; 
-		$headers .= "\r\nMIME-version: 1.0\r\nContent-Type: text/calendar; name=calendar.ics; method=REQUEST; charset=\"iso-8859-1\"";
-		$headers .= "\r\nContent-Transfer-Encoding: 7bit\r\nX-Mailer: Microsoft Office Outlook 12.0"; 
+		//Create Email Body (HTML)
+		$body = "--$mime_boundary\r\n";
+		$body .= "Content-Type: text/html; charset=UTF-8\n";
+		$body .= "Content-Transfer-Encoding: 8bit\n\n";
+		$body .= "<html>\n";
+		$body .= "<body>\n";
+		$body .= '<p>Dear user,</p>';
+		$body .= '<p>'.$subject.'</p>';
+//		$body .= '<p>M-'.$month.' D-'.$day.' H-'.$hour.' M-'.$minute.'</p>';
+		$body .= "</body>\n";
+		$body .= "</html>\n";
+		$body .= "--$mime_boundary\r\n";
+		
+		$ical = 'BEGIN:VCALENDAR' . "\r\n" .
+		'PRODID:-//Microsoft Corporation//Outlook 10.0 MIMEDIR//EN' . "\r\n" .
+		'VERSION:2.0' . "\r\n" .
+		'METHOD:REQUEST' . "\r\n" .
+		'BEGIN:VTIMEZONE' . "\r\n" .
+		'TZID:Eastern Time' . "\r\n" .
+		'BEGIN:STANDARD' . "\r\n" .
+		'DTSTART:'.date("Y").$month.$day.'T'.$hour.$minute.'00' . "\r\n" .
+//		'RRULE:FREQ=YEARLY;INTERVAL=1;BYDAY=1SU;BYMONTH=11' . "\r\n" .
+		'TZOFFSETFROM:-0400' . "\r\n" .
+		'TZOFFSETTO:-0500' . "\r\n" .
+		'TZNAME:EST' . "\r\n" .
+		'END:STANDARD' . "\r\n" .
+		'BEGIN:DAYLIGHT' . "\r\n" .
+		'DTSTART:'.date("Y").$month.$day.'T'.$hour.$minute.'00' . "\r\n" .
+		'DTEND:'.date("Y").$month.$day.'T'.$hour.$minute.'00' . "\r\n" .
+//		'RRULE:FREQ=YEARLY;INTERVAL=1;BYDAY=2SU;BYMONTH=3' . "\r\n" .
+		'TZOFFSETFROM:-0500' . "\r\n" .
+		'TZOFFSETTO:-0400' . "\r\n" .
+		'TZNAME:EDST' . "\r\n" .
+		'END:DAYLIGHT' . "\r\n" .
+		'END:VTIMEZONE' . "\r\n" .	
+		'BEGIN:VEVENT' . "\r\n" .
+		'ORGANIZER;CN="rConfig":MAILTO:'.$smtpFromAddr."\r\n" .
+		'ATTENDEE;CN="Network Admin";ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:'.$smtpRecipientAddr. "\r\n" .
+		'LAST-MODIFIED:' . date("Ymd\THis") . "\r\n" .
+		'UID:'.date("Ymd\THis", strtotime($startTime)).rand()."@".$domain."\r\n" .
+		'DTSTAMP:'.date('Ymd\THis', time()). "\r\n" .
+		'DTSTART;TZID="Eastern Time":'.date("Y").$month.$day.'T'.$hour.$minute.'00' . "\r\n" .
+		'DTEND;TZID="Eastern Time":'.date("Y").$month.$day.'T'.$hour.$minute.'00' . "\r\n" .
+		'TRANSP:OPAQUE'. "\r\n" .
+		'SEQUENCE:1'. "\r\n" .
+		'SUMMARY:' . $subject . "\r\n" .
+		'LOCATION: None' . "\r\n" .
+		'CLASS:PUBLIC'. "\r\n" .
+		'PRIORITY:5'. "\r\n" .
+		'BEGIN:VALARM' . "\r\n" .
+		'TRIGGER:-PT15M' . "\r\n" .
+		'ACTION:DISPLAY' . "\r\n" .
+		'DESCRIPTION:Reminder' . "\r\n" .
+		'END:VALARM' . "\r\n" .
+		'END:VEVENT'. "\r\n" .
+		'END:VCALENDAR'. "\r\n";
+//		$body .= 'Content-Type: text/calendar;name="meeting.ics";method=REQUEST\n';
+//		$body .= "Content-Transfer-Encoding: 8bit\n\n";
+		$body .= $ical;
+		
+		$mail->MsgHTML($body);
 		  
 		$smtpRecipientAddresses = explode("; ", $smtpRecipientAddr);
 
-		// Loop to send email for each address configured on settings page
 		foreach($smtpRecipientAddresses as $emailAddr){
-			if(!mail($emailAddr, $subject, $vcal, $headers)) {
+//			$mail->AddAddress($emailAddr);
+			
+			if(!mail($emailAddr, $subject, $body, $headers)) {
 				$log->Fatal($title .' Mailer Error (' . str_replace("@", "&#64;", $smtpRecipientAddr) . ') ' . $mail->ErrorInfo);
 			} else {
 				$log->Info($title .' Email Report sent to :' . $smtpRecipientAddr . ' (' . str_replace("@", "&#64;", $smtpRecipientAddr) . ')');
 			}
 		}
+		  // $mail->AddStringAttachment($row["photo"], "YourPhoto.jpg");
+
 		  // Clear all addresses and attachments for next loop
 		  $mail->ClearAddresses();
 		  $mail->ClearAttachments();

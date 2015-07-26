@@ -24,13 +24,13 @@ class Mailer
     */
    function sendWelcome($user, $email, $pass){
       $from = "From: ".EMAIL_FROM_NAME." <".EMAIL_FROM_ADDR.">";
-      $subject = "Welcome to rConfig!";
+      $subject = "Welcome to rConfig at Angie's List!";
       $body = $user.",\n\n"
              ."You are now registered with an account for rConfig "
              ."with the following information:\n\n"
              ."Username: ".$user."\n"
              ."Password: ".$pass."\n"
-			 ."rConfig: https://rconfig.domain.com\n\n"
+			 ."rConfig: https://rconfig.angieslist.com\n\n"
              ."If you ever lose or forget your password, a new "
              ."password will be generated for you and sent to this "
              ."email address.  If you would like to change your "

@@ -1,3 +1,4 @@
+<?php require("../classes/db.class.php"); ?>
 <?php include("includes/head.inc.php"); ?>
 <body>
 	<!-- Headwrap Include -->    
@@ -19,7 +20,6 @@
 	<?php include("includes/announcement.inc.php"); ?>
 			<div id="content">
 			<?php
-				require_once("../classes/db.class.php");
 				/* Instantiate DB Class */
 				$db     = new db();
 				$q      = "SELECT 
@@ -90,9 +90,21 @@
 							</table>
 						</div>
 						<div id="#deviceActionsDiv">
-						<?php 
-							echo '<button id="hideAll" onclick="manualDownload(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Begin a manual download of configurations for this device">Manual Download</button>';
-							echo '<button id="hideAll" onclick="configDevice(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Run a configuration snippet on this device">Run Config Snippet</button>';
+						<?php
+							/* Instantiate DB Class */
+							$dbA     = new db();
+							$qA      = $dbA->q("SELECT useDefaultCredsManualSet FROM settings WHERE id = '1'");
+							$resultA = mysql_fetch_assoc($qA);
+							$useDefaultCredsManualSet = $resultA['useDefaultCredsManualSet'];
+
+							if ($useDefaultCredsManualSet == '1'){
+								echo '<button id="hideAll" onclick="manualDownloadCreds(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Begin a manual download of configurations for this device">Manual Download</button>';
+								echo '<button id="hideAll" onclick="configDeviceCreds(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Run a configuration snippet on this device">Run Config Snippet</button>';
+							}
+							else{
+								echo '<button id="hideAll" onclick="manualDownload(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Begin a manual download of configurations for this device">Manual Download</button>';
+								echo '<button id="hideAll" onclick="configDevice(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Run a configuration snippet on this device">Run Config Snippet</button>';
+							}
 						?>
 						</div>
 						

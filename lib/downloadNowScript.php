@@ -44,6 +44,8 @@ if (php_sapi_name() == 'cli') {  // if invoked from CLI
 
 // set vars passed from ajaxDownloadNow.php on require()
 $rid = $passedRid;
+$providedUsername = $passedUsername;
+$providedPassword = $passedPassword;
 
 // Log the script start
 $log->Info("The ".$_SERVER['PHP_SELF']." script was run manually invoked with Router ID: $rid "); // logg to file
@@ -110,13 +112,17 @@ if($result = $db->q($getNodesSql)) {
 		$jsonArray['cmdNoRowsFailMsg'] = $text;
 		echo json_encode($jsonArray);
 		continue;
-	}				
+	}
 	
 	// declare file Class based on catName and DeviceName
 	$file = new file($catName, $device['deviceName'], $config_data_basedir);	
 	
-	// Connect for each row returned - might want to do error checking here based on if an IP is returned or not
-	$conn = new Connection($device['deviceIpAddr'], $device['deviceUsername'], $device['devicePassword'], $device['deviceEnableMode'], $device['deviceEnablePassword'], $device['connPort'], $timeout);
+	if (!empty($providedUsername) && !empty($providedPassword) && $providedUsername != "0" && $providedPassword != "0"){
+		$conn = new Connection($device['deviceIpAddr'], $providedUsername, $providedPassword, $device['deviceEnableMode'], $providedPassword, $device['connPort'], $timeout);
+	}else{
+		// Connect for each row returned - might want to do error checking here based on if an IP is returned or not
+		$conn = new Connection($device['deviceIpAddr'], $device['deviceUsername'], $device['devicePassword'], $device['deviceEnableMode'], $device['deviceEnablePassword'], $device['connPort'], $timeout);
+	}
 
 	$connFailureText = "Failure: Unable to connect to ".$device['deviceName']." - ".$device['deviceIpAddr']." for Router ID ".$rid;
 	$connSuccessText = "Success: Connected to ".$device['deviceName']." (".$device['deviceIpAddr'].") for Router ID ".$rid;

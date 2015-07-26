@@ -38,7 +38,7 @@
 						$ds = disk_total_space("/");
 						$fs = disk_free_space("/");
 						
-						$q = $db->q("SELECT defaultNodeUsername, defaultNodePassword, defaultNodeEnable, commandDebug, commandDebugLocation, deviceConnectionTimout FROM settings WHERE id = 1");
+						$q = $db->q("SELECT defaultNodeUsername, defaultNodePassword, defaultNodeEnable, commandDebug, commandDebugLocation, deviceConnectionTimout, ldapServer FROM settings WHERE id = 1");
 						$result = mysql_fetch_assoc($q);
 						$defaultNodeUsername = $result['defaultNodeUsername'];
 						$defaultNodePassword = $result['defaultNodePassword'];
@@ -46,6 +46,7 @@
 						$status = $result['commandDebug'];
 						$debugLocation = $result['commandDebugLocation'];
 						$timeout = $result['deviceConnectionTimout'];
+						$ldapServer = $result['ldapServer'];
 					?>	
 					<div style="width:60%;">
 						<div class="tableSummary">
@@ -142,9 +143,29 @@
 					<div class="spacer"></div>
 					<span id="updatedDefault" style="display:none; color:green;">Updated!</span>
 					<div class="spacer"></div>
-					<hr/>
-					<br/>							
-
+					<hr />
+					<br />
+					
+					<?php // check if logged in user is admin and display next lines
+						if($session->isAdmin()){ ?>
+					
+						<label>Manual up/download credentials
+						<span class="small">Use default credentials with manual config uploads & downloads:</span>
+						</label>
+							<select id="defaultCredsManualSet" name="defaultCredsManualSet" onChange="defaultCredsManualSet()">
+								<option value="" <?php if(!isset($defaultCredsManualSet) || ($defaultCredsManualSet == '')) { ?>selected<?php } ?>>Select</option>
+								<option value="0" <?php if($defaultCredsManualSet == '0') { ?>selected<?php } ?>>No</option>
+								<option value="1" <?php if($defaultCredsManualSet == '1') { ?>selected<?php } ?>>Yes</option>
+							</select>
+						<div class="spacer"></div>
+						<span id="updatedDefaultCredsManualSet" style="display:none; color:green;">Updated!</span>
+						<div class="spacer"></div>
+						
+						<br />
+						<hr />
+					
+					<?php } // End check if logged in user is admin
+					?>
 					
 					<label>Connection Timeout:
 						<span class="small">Timeout in seconds</span>
@@ -157,7 +178,21 @@
 
 					<div class="spacer"></div>
 					<br/>
-
+					
+					<?php /*	STILL IN TESTING, NOT READY TO DEPLOY
+					<label>LDAP Server:
+						<span class="small">Enter your FQDN LDAP server to authenticate against AD</span>
+						</label>
+					<input type="text" value="<?php echo $ldapServer;?>" id="ldapServer" name="ldapServer" placeholder="LDAP Server" />
+					<label>
+						<button class="smlButton" id="ldapServerGo" onclick="ldapServerGo(document.getElementById('ldapServer').value)">Update</button>
+						<div class="spacer"></div>
+						<span id="updatedLdap" style="display:none; color:green;">Updated!</span>
+					</label>
+					<div class="spacer"></div>
+					<br/>
+					*/?>
+					
 					<label>Debug device output:
 					<span class="small">Turn on device debug</span>
 					</label>

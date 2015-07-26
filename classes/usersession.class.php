@@ -92,28 +92,36 @@ class Session
          $this->userid   = $_SESSION['userid']   = $_COOKIE['cookid'];
       }
 
-      /* Username and userid have been set and not guest */
-      if(isset($_SESSION['username']) && isset($_SESSION['userid']) &&
-         $_SESSION['username'] != GUEST_NAME){
-         /* Confirm that username and userid are valid */
-         if($database->confirmUserID($_SESSION['username'], $_SESSION['userid']) != 0){
-            /* Variables are incorrect, user not logged in */
-            unset($_SESSION['username']);
-            unset($_SESSION['userid']);
-            return false;
-         }
+	  $ldapServerCheck = $database->checkLdapServer();
+	  if ($ldapServerCheck == 0 && isset($_SESSION['username']) && isset($_SESSION['userid']) && $_SESSION['username'] != GUEST_NAME){
+			 $this->username  = $_SESSION['username'];
+			 $this->userid    = $_SESSION['userid'];
+			 $this->userlevel = 9;
+			 return true;
+		} else{
+			  /* Username and userid have been set and not guest */
+			  if(isset($_SESSION['username']) && isset($_SESSION['userid']) &&
+				 $_SESSION['username'] != GUEST_NAME){
+				 /* Confirm that username and userid are valid */
+				 if($database->confirmUserID($_SESSION['username'], $_SESSION['userid']) != 0){
+					/* Variables are incorrect, user not logged in */
+					unset($_SESSION['username']);
+					unset($_SESSION['userid']);
+					return false;
+				 }
 
-         /* User is logged in, set class variables */
-         $this->userinfo  = $database->getUserInfo($_SESSION['username']);
-         $this->username  = $this->userinfo['username'];
-         $this->userid    = $this->userinfo['userid'];
-         $this->userlevel = $this->userinfo['userlevel'];
-         return true;
-      }
-      /* User not logged in */
-      else{
-         return false;
-      }
+				 /* User is logged in, set class variables */
+				 $this->userinfo  = $database->getUserInfo($_SESSION['username']);
+				 $this->username  = $this->userinfo['username'];
+				 $this->userid    = $this->userinfo['userid'];
+				 $this->userlevel = $this->userinfo['userlevel'];
+				 return true;
+			  }
+			  /* User not logged in */
+			  else{
+				 return false;
+			  }
+		}
    }
 
    /**
@@ -150,28 +158,54 @@ class Session
 
       /* Checks that username is in database and password is correct */
       $subuser = stripslashes($subuser);
-      $result = $database->confirmUserPass($subuser, md5($subpass));
-		
-      /* Check error codes */
-      if($result == 1){
-         $field = "user";
-         $form->setError($field, "* Username not found");
-      }
-      else if($result == 2){
-         $field = "pass";
-         $form->setError($field, "* Invalid password");
-      }
-      
-      /* Return if form errors exist */
-      if($form->num_errors > 0){
-         return false;
-      }
-
-      /* Username and password correct, register session variables */
-      $this->userinfo  = $database->getUserInfo($subuser);
-      $this->username  = $_SESSION['username'] = $this->userinfo['username'];
-      $this->userid    = $_SESSION['userid']   = $this->generateRandID();
-      $this->userlevel = $this->userinfo['userlevel'];
+	  $ldapServerCheck = $database->checkLdapServer();
+	  
+	  if ($ldapServerCheck == 0){
+		$ldapServer = $database->getLdapServer();
+		$ldapConn = ldap_connect($ldapServer);
+		$ldapBind = ldap_bind($ldapConn,$subuser,$subpass);
+		  
+		if($ldapBind){
+			/* Username and password correct, register session variables */
+//			$this->userinfo  = $database->getUserInfo($subuser);
+			$this->username  = $_SESSION['username'] = $subuser;
+			$this->userid    = $_SESSION['userid']   = $this->generateRandID();
+			$this->userlevel = 9;
+		}
+		else{
+			$field = "user";
+			$form->setError($field, "* Error logging in using LDAP");
+		}
+		  
+		/* Return if form errors exist */
+		if($form->num_errors > 0){
+			return false;
+		}
+	  }
+	  else{
+		  $result = $database->confirmUserPass($subuser, md5($subpass));
+			
+		  /* Check error codes */
+		  if($result == 1){
+			 $field = "user";
+			 $form->setError($field, "* Username not found");
+		  }
+		  else if($result == 2){
+			 $field = "pass";
+			 $form->setError($field, "* Invalid password");
+		  }
+		  
+		  /* Return if form errors exist */
+		  if($form->num_errors > 0){
+			return false;
+		  }
+		  
+		  /* Username and password correct, register session variables */
+		  $this->userinfo  = $database->getUserInfo($subuser);
+		  $this->username  = $_SESSION['username'] = $this->userinfo['username'];
+		  $this->userid    = $_SESSION['userid']   = $this->generateRandID();
+		  $this->userlevel = $this->userinfo['userlevel'];
+	  }
       
       /* Insert userid into database and update active users table */
       $database->updateUserField($this->username, "userid", $this->userid);

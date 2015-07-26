@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `categoryName` varchar(255) DEFAULT '0',
   `status` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table DATABASE_NAME.categories: ~5 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `compliancePolElem` (
   `singleLine1` varchar(255) DEFAULT NULL,
   `status` int(10) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 -- Dumping structure for table DATABASE_NAME.compliancePolElemTbl
 CREATE TABLE IF NOT EXISTS `compliancePolElemTbl` (
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `compliancePolicies` (
   `policyDesc` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 -- Dumping structure for table DATABASE_NAME.complianceReportPolTbl
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `complianceReports` (
   `reportsDesc` varchar(255) DEFAULT NULL,
   `status` int(10) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 -- Dumping structure for table DATABASE_NAME.configcommands
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `configcommands` (
   `command` varchar(255) DEFAULT NULL,
   `status` int(10) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table DATABASE_NAME.configcommands: ~6 rows (approximately)
 /*!40000 ALTER TABLE `configcommands` DISABLE KEYS */;
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `configs` (
   `configFilename` varchar(255) DEFAULT NULL,
   `configDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12695 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   `status` int(10) DEFAULT '1',
    `custom_Location` varchar(255) DEFAULT NULL COMMENT 'Custom Property - Location',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 -- Dumping structure for table DATABASE_NAME.reportData
@@ -233,6 +233,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `defaultNodeUsername` varchar(255) DEFAULT NULL,
   `defaultNodePassword` varchar(255) DEFAULT NULL,
   `defaultNodeEnable` varchar(255) DEFAULT NULL,
+  `useDefaultCredsManualSet` int(1) DEFAULT NULL,
   `commandDebug` int(10) DEFAULT '0' COMMENT '0 is default where 1 is debug on',
   `commandDebugLocation` varchar(255) DEFAULT NULL,
   `phpErrorLogging` int(2) DEFAULT '0',
@@ -247,6 +248,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `smtpLastTest` varchar(20) DEFAULT NULL,
   `smtpLastTestTime` datetime DEFAULT NULL,
   `timeZone` VARCHAR(100) DEFAULT NULL,
+  `ldapServer` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -355,3 +357,33 @@ FROM `nodes` WHERE ((`nodes`.`model` <> 'NULL')
 AND (`nodes`.`model` <> ''));
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+-- Dumping structure for table DATABASE_NAME.configtemplates
+CREATE TABLE IF NOT EXISTS `configtemplates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `templateName` varchar(50) NOT NULL,
+  `templateDesc` varchar(50) NOT NULL,
+  `template` mediumtext NOT NULL,
+  `templateVars` mediumtext NOT NULL,
+  `templateVarSyms` mediumtext NOT NULL,
+  `templateVarSubs` mediumtext NOT NULL,
+  `newTemplate` mediumtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+-- Dumping structure for table DATABASE_NAME.generatedConfigs
+CREATE TABLE `generatedConfigs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `configName` varchar(50) NOT NULL,
+  `templateName` varchar(50) NOT NULL,
+  `configDesc` varchar(50) NOT NULL,
+  `linkedId` int(11) NOT NULL,
+  `newConfig` mediumtext NOT NULL,
+  `configLocation` varchar(100) NOT NULL,
+  `configFilename` varchar(100) NOT NULL,
+  `configDate` date NOT NULL,
+  `status` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

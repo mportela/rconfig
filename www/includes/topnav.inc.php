@@ -15,6 +15,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 			<li><a href="configoverview.php">Configuration Tools</a></li>
 			<li><a href="complianceoverview.php">Compliance</a></li>
 			<li><a href="settings.php">Settings</a></li>
+			<li><a href="templategen.php">Templates</a></li>
 		</ul>
 		<div id="navtitle"><?php echo $host.":". $ip ?></div>
 	</div>
@@ -53,6 +54,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 			<li><a href="configoverview.php">Configuration Tools</a></li>
 			<li><a href="complianceoverview.php">Compliance</a></li>
 			<li><a href="settings.php">Settings</a></li>
+                        <li><a href="templategen.php">Templates</a></li>
 		</ul>
 		<div id="navtitle"><?php echo $host.":". $ip ?></div>
 	</div>
@@ -85,6 +87,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 				<li><a href="configoverview.php">Configuration Tools</a></li>
 				<li><a href="complianceoverview.php">Compliance</a></li>
 				<li><a href="settings.php">Settings</a></li>
+                	        <li><a href="templategen.php">Templates</a></li>
 			</ul>
 			<div id="navtitle"><?php echo $host.":". $ip ?></div>
 		</div>
@@ -124,6 +127,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 					>Configuration Tools</a></li>
 			<li><a href="complianceoverview.php">Compliance</a></li>
 			<li><a href="settings.php">Settings</a></li>
+                        <li><a href="templategen.php">Templates</a></li>
 		</ul>
 		<div id="navtitle"><?php echo $host.":". $ip ?></div>
 	</div>
@@ -158,6 +162,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 			<li><a href="configoverview.php">Configuration Tools</a></li>
 			<li><a href="complianceoverview.php" class="active">Compliance</a></li>
 			<li><a href="settings.php">Settings</a></li>
+                        <li><a href="templategen.php">Templates</a></li>
 		</ul>
 		<div id="navtitle"><?php echo $host.":". $ip ?></div>
 	</div>
@@ -204,6 +209,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 				$config_page == "settingsBackup.php") {
 				echo "class='active'";
 				}?>>Settings</a></li>
+                        <li><a href="templategen.php">Templates</a></li>
 		</ul>
 		<div id="navtitle"><?php echo $host.":". $ip ?></div>
 	</div>
@@ -228,11 +234,45 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 <?php 
 /* SETTINGS */
 
-			break; /* End Switch check for Devices and subpages */
-				
-		
-			break;
-				default:
-				echo "Page Title Not Found";			
-			}
+
+                        break; /* End Switch check for Devices and subpages */
+
+/* TEMPLATES */
+/* Switch check for Config Overview and subpages */
+				case "templategen.php";
+				case "templategenconfig.php";
+
+?>
+<div id="navwrap">
+        <div id="nav">
+                <ul>
+                        <li><a href="dashboard.php">Home</a></li>
+                        <li><a href="devices.php">Devices</a></li>
+                        <li><a href="scheduler.php">Scheduled Tasks</a></li>
+                        <li><a href="configoverview.php">Configuration Tools</a></li>
+                        <li><a href="complianceoverview.php">Compliance</a></li>
+                        <li><a href="settings.php">Settings</a></li>
+                        <li><a href="templategen.php"
+                                <?php if($config_page == "templategen.php" ||
+								$config_page == "templategenconfig.php") {
+                                echo "class='active'";
+                                }?>>Templates</a></li>
+                </ul>
+                <div id="navtitle"><?php echo $host.":". $ip ?></div>
+        </div>
+        <div id="nav2">
+                <ul>
+                        <li <?php if($config_page == "templategen.php") {echo "class='nav2Selected'";}?>><a href="templategen.php">Create Template</a></li>
+						<li <?php if($config_page == "templategenconfig.php") {echo "class='nav2Selected'";}?>><a href="templategenconfig.php">Generated Configs</a></li>
+                </ul>
+        </div>
+</div>
+<?php
+                        break; /* End Switch check for Devices and subpages */
+/* TEMPLATE TOOLS */
+
+                        break;
+                                default:
+                                echo "Page Title Not Found";
+                        }
 } ?>

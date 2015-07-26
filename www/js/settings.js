@@ -8,6 +8,9 @@ $(function () {
     })    
 	$.getJSON("lib/ajaxHandlers/ajaxSettingsProcess.php?getTimeZone", function (dataTime) {
         $("#timeZone").val(dataTime)
+    })    
+	$.getJSON("lib/ajaxHandlers/ajaxSettingsProcess.php?getDefaultCredsManualSet", function (dataCredSet) {
+        $("#defaultCredsManualSet").val(dataCredSet)
     })
     $.getJSON("lib/ajaxHandlers/ajaxReadDirtoArr.php?path=/home/rconfig/logs/debugging/&ext=txt", function (data) {
 
@@ -78,6 +81,11 @@ $(function () {
 	
 // when pressing Enter on text box, auto-click relevant Update button
 	$(document).ready(function(){
+// LDAP Server text box
+		$('#ldapServer').keypress(function(e){
+		  if(e.keyCode==13)
+		  $('#ldapServerGo').click();
+		});
 //Connection Timeout text box
 		$('#deviceTout').keypress(function(e){
 		  if(e.keyCode==13)
@@ -267,4 +275,32 @@ function updateDefaultPass(defaultNodeUsername, defaultNodePassword, defaultNode
             }
         });
 
+}
+
+function ldapServerGo(ldapServer){
+	var ldapServer = ldapServer
+	
+		$.getJSON('lib/ajaxHandlers/ajaxUpdateLdapServer.php?ldapServer=' + ldapServer, function (data) {
+			if (data) {
+				var response = data
+				document.getElementById('updatedLdap').innerHTML = response;
+				$('#updatedLdap').slideDown('fast');
+			}
+		});
+}
+
+function defaultCredsManualSet() {
+    var defaultCredsManualSet = $('#defaultCredsManualSet').val();
+
+    if (defaultCredsManualSet != '') {
+        $.getJSON("lib/ajaxHandlers/ajaxSettingsProcess.php?defaultCredsManualSet=" + defaultCredsManualSet, function (data) {
+            if (data) {
+                var response = data
+				document.getElementById('updatedDefaultCredsManualSet').innerHTML = response;
+				$('#updatedDefaultCredsManualSet').slideDown('fast');
+            }
+        });
+    } else {
+        alert('Could not set default credentials setting when manually uploading & downloading configs')
+    }
 }

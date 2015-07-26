@@ -2,15 +2,21 @@
   // alert(document.URL);
 	$('#noticeBoard').hide();
 	var rid = location.search.split('rid=')[1]
-	runDownloadScript(rid);
+	var username = location.search.split('username=')[1]
+	var password = location.search.split('password=')[1]
+	if (isEmpty(username) && isEmpty(password)){
+		runDownloadScript(rid, "0", "0");
+	}else{
+		runDownloadScript(rid, username, password);
+	}
   });
   
   
   
-function runDownloadScript(rid){
+function runDownloadScript(rid, username, password){
     $.ajax({
         async: false, // prevent an async call
-        url: 'lib/ajaxHandlers/ajaxDownloadNow.php?rid='+rid,
+        url: 'lib/ajaxHandlers/ajaxDownloadNow.php?rid='+rid+'&username='+username+'&password='+password,
         data: {},
         dataType: "json",
 		 complete: function(){

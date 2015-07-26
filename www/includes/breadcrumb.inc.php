@@ -78,6 +78,13 @@
 					case "updater.php":
 					echo "Update";
 						break;
+				/* Template Subpages */
+					case "templategen.php":
+					echo "Template > Template Generator";
+						break;
+					case "templategenconfig.php":
+					echo "Template > Generated Configs";
+						break;
 				default:
 			echo "<font color=\"red\">Page Title Not Found</font>";			
 			}

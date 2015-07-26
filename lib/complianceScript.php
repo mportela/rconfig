@@ -103,7 +103,10 @@ if ($result = $db->q($getNodesSql)) {
 		}
 			
 		$pathResult_a = $pathResultLatest['configLocation'];
-		$configFile = $pathResult_a . '/' . $command . '.txt';
+		$filenameResult_a = $pathResultLatest['configFilename'];
+		$configFile = $pathResult_a . '/' . $filenameResult_a;
+		
+//		$configFile = $pathResult_a . '/' . $command . '.txt';
 		$tableRow = "";	// set tableRow for later use and avoid  Undefined variable errors
 		
 		foreach ($policies as $k=>$v){
