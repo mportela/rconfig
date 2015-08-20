@@ -93,7 +93,7 @@
 			</fieldset>
 			
 			<fieldset id="dashboadFieldSet" style="width:50%; min-height:147px; float:left;">
-				<legend>Last 5 devices added</legend>
+				<legend>Last 5 devices added/modified</legend>
 				<div id="last5NodesAdded">
 					<table class="tableSimple">
 					<thead>
