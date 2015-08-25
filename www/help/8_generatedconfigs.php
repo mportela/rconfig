@@ -1,4 +1,4 @@
-<?php include("includes/head.main.inc.php"); ?>
+<!--<?php include("includes/head.main.inc.php"); ?>
 	<div id="mainBanner">
 		<div id="title">
 			<h1>General Settings </h1>

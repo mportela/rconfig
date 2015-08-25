@@ -66,6 +66,14 @@
     </ul>
   </li>
   
+  <li class="directory">
+    Templates
+    <ul>
+      <li class="txt"><a href="8_createtemplate.php" target="content">Create Template</a></li>
+      <li class="txt"><a href="8_generatedconfigs.php" target="content">Generated Configs</a></li>
+    </ul>
+  </li>
+  
 </ul>
 
 </div>

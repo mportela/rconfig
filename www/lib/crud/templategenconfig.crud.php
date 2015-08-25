@@ -12,6 +12,7 @@ if (isset($_POST['del'])) {
     $tid = $_POST['id'];
 	
     /* the DB query*/
+	// Set relevant row in MySQL databse table to a status of 2
     $delTaskQ    = "UPDATE generatedConfigs SET status = 2 WHERE id = " . $tid;
 
     if ($result = $db->q($delTaskQ)) {
@@ -26,12 +27,15 @@ if (isset($_POST['del'])) {
         ));
     }
 	
+	// Pull the config file location (directory) and filename from the MySQL table where status is 2 (previously set above)
 	$delFileSelectQ = "SELECT configLocation, configFilename FROM generatedConfigs WHERE status = 2";
 	$delResult = $db->q($delFileSelectQ) or die ("ERROR: " .mysql_error());
 	while ($delRow = mysql_fetch_assoc($delResult)) {
-		exec('rm -rf ' . $delRow['configLocation'] . $delRow['configFilename']);
+		// Delete the local file. Double quotes around directory and filename needed in case of spaces in filename
+		exec('rm -rf "' . $delRow['configLocation'] . $delRow['configFilename'] . '"');
 	}
 	
+	// Remove the file data from the MySQL database since it no longer exists
 	$delStatusRow = "DELETE FROM generatedConfigs WHERE status = 2";
 	if ($delStatusRowResult = $db->q($delStatusRow)) {
         $log->Info("Success: Deleted generated config file from database " . $_POST['id'] . " in DB (File: " . $_SERVER['PHP_SELF'] . ")");

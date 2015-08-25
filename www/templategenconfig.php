@@ -30,7 +30,7 @@
 				<div id="toolbar">
 					<button onclick="viewGenConfig()">View Config Template</button>
 					<button onclick="delGenConfig()">Remove Config Template</button>
-				</div> <?php /* LEFT OFF need to created these two functions in .js and .crud.php files, similar to deploy.php buttons */ ?>
+				</div>
 				<div id="table">
 					<?php 
 					/* full table stored off in different script */

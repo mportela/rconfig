@@ -150,7 +150,7 @@
 						if($session->isAdmin()){ ?>
 					
 						<label>Manual up/download credentials
-						<span class="small">Use default credentials with manual config uploads & downloads:</span>
+						<span class="small">Disable default credentials with manual config uploads & downloads:</span>
 						</label>
 							<select id="defaultCredsManualSet" name="defaultCredsManualSet" onChange="defaultCredsManualSet()">
 								<option value="" <?php if(!isset($defaultCredsManualSet) || ($defaultCredsManualSet == '')) { ?>selected<?php } ?>>Select</option>
