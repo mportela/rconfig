@@ -46,28 +46,28 @@
 					<div id="formDiv" style="width:600px; margin-bottom:10px;">
 					<div id="templateNameDiv">
 						<label for="templateName"><font color="red">*</font> Template Name:</label>
-						<input name="templateName" id="templateName" size="75" tabindex='1' required />
+						<input name="templateName" id="templateName" size="75" tabindex='1' title="Template name" required />
 					</div>
 					<div style="float:left;" id="templateDescDiv">
 						<label for="templateDesc"> Template Description:</label>
-						<input name="templateDesc" id="templateDesc" size="150" tabindex='2' />
+						<input name="templateDesc" id="templateDesc" size="150" tabindex='2' title="Template description" />
 					</div>
 
 					<div style="clear:both" id="templateDiv">
 						<label for="template"><font color="red">*</font> Config Template:</label>
-						<textarea rows="8" cols="100" wrap="off" id="template" name="template" tabindex='6' style="width:500px;margin-left:10px;float:clear;" required />
+						<textarea rows="8" cols="100" wrap="off" id="template" name="template" tabindex='6' style="width:500px;margin-left:10px;float:clear;" title="Base config with variables surrounded by an @ symbol to replace changed variables (eg. @IPADDR@)  See help files for more info" required />
 						</textarea> 
 						<div class="spacer"></div>
 					</div>
 					
 					<div id="newConfigNameDiv">
 						<label for="newConfigName"><font color="red">*</font> New Config Name:</label>
-						<input name="newConfigName" id="newConfigName" size="75" tabindex='1' required />
+						<input name="newConfigName" id="newConfigName" size="75" tabindex='1' title="Name for new config file generated based off the selected Template" required />
 					</div>
 
 					<div style="clear:both" id="templateVarsDiv">
 						<label for="templateVars"><font color="red">*</font> Extracted Variables:</label>
-						<textarea rows="8" cols="100" wrap="off" id="templateVars" name="templateVars" tabindex='7' style="width:500px;margin-left:10px;float:clear;" readonly />
+						<textarea rows="8" cols="100" wrap="off" id="templateVars" name="templateVars" tabindex='7' style="width:500px;margin-left:10px;float:clear;" title="All unique variables extracted from the Template"readonly />
 						</textarea>
 						<br />
 						<font size="1">For each extracted variable above, enter in the value to be substituted, for each displayed variable, in the same order as above.</font>
@@ -76,7 +76,7 @@
 
 					<div style="clear:both" id="templateVarSubsDiv">
 						<label for="templateVarSubs"><font color="red">*</font> Variable Substitution:</label>
-						<textarea rows="8" cols="100" wrap="off" id="templateVarSubs" name="templateVarSubs" tabindex='8' style="width:500px;margin-left:10px;float:clear;" required />
+						<textarea rows="8" cols="100" wrap="off" id="templateVarSubs" name="templateVarSubs" tabindex='8' style="width:500px;margin-left:10px;float:clear;" title="For each extracted variable, enter in the data you want to substitute it for when generating this config file.  One data substitution per line.  See help files for more info" required />
 						</textarea>
 						<div class="spacer"></div>
 					</div>
