@@ -29,7 +29,7 @@
 				<?php if(isset($errors['crontab'])){echo "<span class=\"error\">".$errors['crontab']."</span><br/>";}?>
 				<div id="toolbar">
 					<button class="show_hide">Add Config Template</button>
-					<button onclick="genTemplate()">Generate Config Template</button>
+					<button onclick="genTemplate()">Generate Config</button>
 					<button onclick="editTemplate()">Edit Config Template</button>
 					<button onclick="delTemplate()">Remove Config Template</button>
 				</div>

@@ -28,8 +28,8 @@
 				<?php if(isset($errors['fileCreateError'])){echo "<span class=\"error\">".$errors['fileCreateError']."</span><br/>";}?>
 				<?php if(isset($errors['crontab'])){echo "<span class=\"error\">".$errors['crontab']."</span><br/>";}?>
 				<div id="toolbar">
-					<button onclick="viewGenConfig()">View Config Template</button>
-					<button onclick="delGenConfig()">Remove Config Template</button>
+					<button onclick="viewGenConfig()">View Config</button>
+					<button onclick="delGenConfig()">Remove Config</button>
 				</div>
 				<div id="table">
 					<?php 
