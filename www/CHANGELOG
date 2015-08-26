@@ -3,11 +3,11 @@ Version 3.1.0
 28-Aug-2015
 Author: Matt Vitale
 
-	Added - rConfig now disables HTTP and only uses HTTPS by default.  This can be reverted in the /etc/httpd/conf/httpd.conf file by uncommenting the "#Listen 80" line
 	Added - Config template generation feature
 	Added - Option to require user credentials before manually downloading configs or pushing config snippets (instead of the default stored credentials)
-		-Must be an admin to change setting requiring this or not on the Settings page
-		-Mainly used for security/auditors needing to know who exactly logged into a device, instead of the logs always showing rConfig
+		-Must be an admin to toggle this setting on the Settings page
+		-Mainly used for security/auditors needing to know who exactly logged into a device, instead of the logs always showing rConfig's stored credentials
+	Added - rConfig now disables HTTP and only uses HTTPS by default.  This can be reverted in the /etc/httpd/conf/httpd.conf file by uncommenting the "#Listen 80" line
 	Fixed - Compliance reports not working correctly
 	Changed - Various user interface tweaks and improvements
 	Updated - Help files with newer features
