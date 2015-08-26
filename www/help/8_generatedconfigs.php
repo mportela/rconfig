@@ -38,6 +38,8 @@
 			<div class="break"></div>
 			<img class="imgfig" src="images/templateconfig3.png"/>
 		</p>
+		<div class="break"></div>
+		<div class="break"></div>
 	</div>
 </body>
 </html>

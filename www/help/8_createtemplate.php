@@ -80,6 +80,8 @@
 		<p>
 			Once the config is generated based off a template, you can view the newly generated config file by going to the Generated Configs sub-menu.
 		</p>
+		<div class="break"></div>
+		<div class="break"></div>
 	</div>
 </body>
 </html>
