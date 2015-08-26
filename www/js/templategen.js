@@ -118,7 +118,11 @@ function genTemplate() {
 						$('.mainformDiv').slideToggle();
 					}
                     $('input[name="templateName"]').val(templateName)
+					$('input[name="templateName"]').blur()
+					$('input[name="templateName"]').css({'background-color' : '#DFD8D1'})
 					$('textarea[name="templateVars"]').val(templateVars)
+					$('textarea[name="templateVars"]').blur()
+					$('textarea[name="templateVars"]').css({'background-color' : '#DFD8D1'})
 					$('textarea[name="templateVarSubs"]').val("")
                     $('input[name="genid"]').val(rowid) // used to populate id input so that edit script will insert
 					

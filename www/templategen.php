@@ -45,58 +45,40 @@
 					
 					<div id="formDiv" style="width:600px; margin-bottom:10px;">
 					<div id="templateNameDiv">
-						<label for="templateName"> Template Name:</label>
-						<input name="templateName" id="templateName" size="75" tabindex='1' <?php if(isset($errors['templateNameVal'])){ echo 'value="'.$errors['templateNameVal'].'"';}?>>
-						<div  id="errorDiv" style="float:left;margin-left:220px; margin-top:-10px; margin-bottom:10px;">
-						<?php if(isset($errors['templateName'])){echo "<span class=\"error\">".$errors['templateName']."</span>";}?>
-						</div>
+						<label for="templateName"><font color="red">*</font> Template Name:</label>
+						<input name="templateName" id="templateName" size="75" tabindex='1' required />
 					</div>
 					<div style="float:left;" id="templateDescDiv">
 						<label for="templateDesc"> Template Description:</label>
-						<input name="templateDesc" id="templateDesc" size="150" tabindex='2'  <?php if(isset($errors['templateDescVal'])){ echo 'value="'.$errors['templateDescVal'].'"';}?>>
-						<div id="errorDiv" style="float:left;margin-left:220px; margin-top:-10px; margin-bottom:10px;">
-						<?php if(isset($errors['templateDesc'])){echo "<span class=\"error\">".$errors['templateDesc']."</span>";}?>
-						</div>
+						<input name="templateDesc" id="templateDesc" size="150" tabindex='2' />
 					</div>
 
 					<div style="clear:both" id="templateDiv">
-						<label for="template"> Config Template:</label>
-						<textarea rows="8" cols="100" wrap="off" id="template" name="template" tabindex='6' style="width:500px;margin-left:10px;float:clear;" <?php if(isset($errors['templateVal'])){ echo 'value="'.$errors['templateVal'].'"';}?>/>
+						<label for="template"><font color="red">*</font> Config Template:</label>
+						<textarea rows="8" cols="100" wrap="off" id="template" name="template" tabindex='6' style="width:500px;margin-left:10px;float:clear;" required />
 						</textarea> 
 						<div class="spacer"></div>
-						<div  id="errorDiv" style="float:left;margin-left:77px; margin-top:-10px; margin-bottom:10px;">
-							<?php if(isset($errors['template'])){echo "<span class=\"error\">".$errors['template']."</span>";}?>
-						</div>
 					</div>
 					
 					<div id="newConfigNameDiv">
-						<label for="newConfigName"> New Config Name:</label>
-						<input name="newConfigName" id="newConfigName" size="75" tabindex='1' <?php if(isset($errors['newConfigNameVal'])){ echo 'value="'.$errors['newConfigNameVal'].'"';}?>>
-						<div  id="errorDiv" style="float:left;margin-left:220px; margin-top:-10px; margin-bottom:10px;">
-						<?php if(isset($errors['newConfigName'])){echo "<span class=\"error\">".$errors['newConfigName']."</span>";}?>
-						</div>
+						<label for="newConfigName"><font color="red">*</font> New Config Name:</label>
+						<input name="newConfigName" id="newConfigName" size="75" tabindex='1' required />
 					</div>
 
 					<div style="clear:both" id="templateVarsDiv">
-						<label for="templateVars"> Extracted Variables:</label>
-						<textarea rows="8" cols="100" wrap="off" id="templateVars" name="templateVars" tabindex='7' style="width:500px;margin-left:10px;float:clear;" readonly <?php if(isset($errors['templateVarsVal'])){ echo 'value="'.$errors['templateVarsVal'].'"';}?>/>
+						<label for="templateVars"><font color="red">*</font> Extracted Variables:</label>
+						<textarea rows="8" cols="100" wrap="off" id="templateVars" name="templateVars" tabindex='7' style="width:500px;margin-left:10px;float:clear;" readonly />
 						</textarea>
 						<br />
 						<font size="1">For each extracted variable above, enter in the value to be substituted, for each displayed variable, in the same order as above.</font>
 						<div class="spacer"></div>
-						<div  id="errorDiv" style="float:left;margin-left:77px; margin-top:-10px; margin-bottom:10px;">
-							<?php if(isset($errors['templateVars'])){echo "<span class=\"error\">".$errors['templateVars']."</span>";}?>
-						</div>
 					</div>
 
 					<div style="clear:both" id="templateVarSubsDiv">
-						<label for="templateVarSubs"> Variable Substitution:</label>
-						<textarea rows="8" cols="100" wrap="off" id="templateVarSubs" name="templateVarSubs" tabindex='8' style="width:500px;margin-left:10px;float:clear;" <?php if(isset($errors['templateVarSubsVal'])){ echo 'value="'.$errors['templateVarSubsVal'].'"';}?>/>
+						<label for="templateVarSubs"><font color="red">*</font> Variable Substitution:</label>
+						<textarea rows="8" cols="100" wrap="off" id="templateVarSubs" name="templateVarSubs" tabindex='8' style="width:500px;margin-left:10px;float:clear;" required />
 						</textarea>
 						<div class="spacer"></div>
-						<div  id="errorDiv" style="float:left;margin-left:77px; margin-top:-10px; margin-bottom:10px;">
-							<?php if(isset($errors['templateVarSubs'])){echo "<span class=\"error\">".$errors['templateVarSubs']."</span>";}?>
-						</div>
 					</div>
 
 					<input type="hidden" id="add" name="add" value="add" tabindex='3'>

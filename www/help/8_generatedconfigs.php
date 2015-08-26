@@ -1,39 +1,43 @@
-<!--<?php include("includes/head.main.inc.php"); ?>
+<?php include("includes/head.main.inc.php"); ?>
 	<div id="mainBanner">
 		<div id="title">
-			<h1>General Settings </h1>
+			<h1>Generated Configs</h1>
 		</div>
 	</div>
 	<div id="mainContent">
 		<div class="break"></div>
 		<p>
-			The General Settings page contains some generic rConfig system settings and information
-			</p>
-			<h4 class="helpH4">Server Details</h4>
-			<p>
-				This section contains some basic server resource information such as Memory, CPU and hard disk space.
-				Also, you can set the time zone on this page. It is important that you do this, as some backend scripts require this setting to be accurate.<br /><br />
-			</p>
-			<h4 class="helpH4">Device Settings</h4>
-			<p>
-				This sections has settings and information relating to devices.
-				The first three username/ password fields are used to auto-populate the username/password fields for the device add form on the Device page.<br /><br />
-				Manual up/download credentials section can be set to Yes to force users to manually enter in their username and password for logging into a network device prior to manually initiating a config snippet upload or config download  If set to no, a manual config snippet upload or config download will use the default credentials stored from the fields above.
-				This setting can only be modified by a user with the Admin privileges.<br /><br />
-				The default device connection timeout when rConfig is connecting to devices is 60 seconds. You may change this to suit your requirements.<br /><br />
-				Turn on Debug device output to get more verbose logging. Generally only used for support purposes.
-				You can view and delete debug logs here also.<br /><br />
-			</p>
-			<h4 class="helpH4">Email Settings</h4>
-			<p>
-				Please enter your mail server details per the Email Settings form. You can also test your SMTP server by clicking the 'Test Mail Server' button.<br /><br />
-			</p>
-			<h4 class="helpH4">Software & Database Details</h4>
-			<p>
-				PHP, Database and node count information is displayed in the next section, as well as the option to enable PHP logging. This should be set to Off, except if explicitly asked to turn it on for support.
-			</p>
-
+			Here you will find all previously generated config files that were based off a Template.
+			<ul><li>The Name is the name given to the config file.</li>
+			<li>The Template Name is the template this config file was based off of.</li>
+			<li>The Filename is the name of the file as stored on the <span class="rconfigNameStyle">rConfig</span> server.</li></ul>
+		</p>
 		<div class="break"></div>
+		<p>
+			To view the configuration file, select the one you want to view and click View Config (fig1).  A pop up window will appear (fig2).  In the pop up window, it lists some information about the generated config.  Click on the link underneath Config Link to open the generated config.  You can also right-click this link and select Save As to save it as a text file.
+		</p>
+		<div class="break"></div>
+		<p>
+			fig1.
+			<div class="break"></div>
+			<img class="imgfig" src="images/templateconfig1.png"/>
+		</p>
+		<div class="break"></div>
+		<p>
+			fig2.
+			<div class="break"></div>
+			<img class="imgfig" src="images/templateconfig2.png"/>
+		</p>
+		<div class="break"></div>
+		<p>
+			This is an example of the generated configuration file from the New York Switch example earlier.
+		</p>
+		<div class="break"></div>
+		<p>
+			fig3.
+			<div class="break"></div>
+			<img class="imgfig" src="images/templateconfig3.png"/>
+		</p>
 	</div>
 </body>
 </html>

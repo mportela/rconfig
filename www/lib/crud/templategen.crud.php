@@ -28,7 +28,7 @@ $templateVarSubsRaw = $_POST['templateVarSubs'];
 $templateVarSubs = strip_tags($templateVarSubsRaw);
 $templateVarSubs = mysql_real_escape_string($templateVarSubs);
 
-/* validations */
+/* validations *** No longer needed ***
 
 // validate templateName field
 if (empty($templateName) && empty($_POST['genid'])) {
@@ -53,7 +53,7 @@ if (empty($templateVarSubs) && !empty($_POST['genid'])) {
 // validate newConfigName field
 if (empty($newConfigName) && !empty($_POST['genid'])) {
 	$errors['newConfigName'] = "New Config Name field cannot be empty";
-}
+} */
 
 /* Validation for variable substitution count matches detected variable count by script
 	** need to fix **
