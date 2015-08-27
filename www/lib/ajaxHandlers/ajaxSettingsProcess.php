@@ -291,7 +291,11 @@ class Process
         
         /* Update successful */
         if ($q) {
-            $response = "<font color='red'>Default credentials have been " . $status . " for manual uploads & downloads</font>";
+			if ($_GET['defaultCredsManualSet'] == '1') {
+				$response = "<font color='red'>Default credentials are disabled and individual users will have to input their credentials for manual config uploads & downloads</font>";
+			} else {
+				$response = "<font color='red'>Default credentials are enabled and will be used for manual config uploads & downloads</font>";
+			}
         }
         /* Update failed */
         else {

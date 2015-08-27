@@ -11,7 +11,7 @@
 		<li><a href="http:///www.rconfig.com/" target="_blank"  alt="rConfig home page"  title="rConfig support page" >Online Support</a> <img src="images/icon_popup_light.gif"/> | </li>
 	</ul>
 	<div id="footer-copyright">
-		<p>rConfig Version <?php echo $config_version;?><span>&nbsp;&nbsp;&nbsp;</span>&copy; rConfig 2012 - <?php echo date("Y"); ?></p>
+		<p>rConfig Version <?php echo $config_version;?><span>&nbsp;&nbsp;&nbsp;</span>&copy; rConfig 2015 - <?php echo date("Y"); ?></p>
 		
 	</div>
 </div> <!-- End Footer -->

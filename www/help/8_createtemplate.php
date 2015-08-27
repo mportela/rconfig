@@ -21,7 +21,7 @@
 		<p>
 			fig1.
 			<div class="break"></div>
-			<img class="imgfig" src="images/template1.png"/>
+			<img class="imgfig" src="images/template1.jpg"/>
 		</p>
 		<div class="break"></div>
 		<p>
@@ -39,7 +39,7 @@
 		<p>
 			fig2.
 			<div class="break"></div>
-			<img class="imgfig" src="images/template2.png"/>
+			<img class="imgfig" src="images/template2.jpg"/>
 		</p>
 		<div class="break"></div>
 		<p>
@@ -49,7 +49,7 @@
 		<p>
 			fig3.
 			<div class="break"></div>
-			<img class="imgfig" src="images/template3.png"/>
+			<img class="imgfig" src="images/template3.jpg"/>
 		</p>
 		<div class="break"></div>
 		<p>
@@ -75,7 +75,7 @@
 		<p>
 			fig4.
 			<div class="break"></div>
-			<img class="imgfig" src="images/template4.png"/>
+			<img class="imgfig" src="images/template4.jpg"/>
 		</p>
 		<p>
 			Once the config is generated based off a template, you can view the newly generated config file by going to the Generated Configs sub-menu.

@@ -65,7 +65,14 @@
 					break;												  
 				case "compliancepolicyelements.php":
 					echo "Configuration Compliance Policy Elements";
-					break;								  
+					break;
+				/* Template Subpages */
+				case "templategen.php":
+					echo "Config Template Generator";
+					break;
+				case "templategenconfig.php":
+					echo "New Template-Based Generated Configs";
+					break;							  
 				/* Settings Subpages */
 				case "settings.php":
 					echo "Change general systems settings on this page";
@@ -78,12 +85,6 @@
 					break;
 				case "updater.php":
 					echo "Update rConfig on this page";
-					break;
-				case "templategen.php":
-					echo "Config Template Generator";
-					break;
-				case "templategenconfig.php":
-					echo "New Template-Based Generated Configs";
 					break;
 				default:
 					echo "Page Title Not Found";

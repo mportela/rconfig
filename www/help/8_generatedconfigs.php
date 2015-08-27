@@ -20,13 +20,13 @@
 		<p>
 			fig1.
 			<div class="break"></div>
-			<img class="imgfig" src="images/templateconfig1.png"/>
+			<img class="imgfig" src="images/templateconfig1.jpg"/>
 		</p>
 		<div class="break"></div>
 		<p>
 			fig2.
 			<div class="break"></div>
-			<img class="imgfig" src="images/templateconfig2.png"/>
+			<img class="imgfig" src="images/templateconfig2.jpg"/>
 		</p>
 		<div class="break"></div>
 		<p>
@@ -36,7 +36,7 @@
 		<p>
 			fig3.
 			<div class="break"></div>
-			<img class="imgfig" src="images/templateconfig3.png"/>
+			<img class="imgfig" src="images/templateconfig3.jpg"/>
 		</p>
 		<div class="break"></div>
 		<div class="break"></div>
