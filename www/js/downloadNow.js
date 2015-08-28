@@ -4,7 +4,7 @@
 	var rid = location.search.split('rid=')[1]
 	var username = location.search.split('username=')[1]
 	var password = location.search.split('password=')[1]
-	if (isEmpty(username) && isEmpty(password)){
+	if (!username && !password){
 		runDownloadScript(rid, "0", "0");
 	}else{
 		runDownloadScript(rid, username, password);

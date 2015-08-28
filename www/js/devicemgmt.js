@@ -40,7 +40,7 @@ function hideAll() {
 
 function manualDownload(rid) {
 	//this function really only opens the downloadNow popup
-	window.open('downloadNow.php?rid='+rid, 
+	window.open('downloadNow.php?rid='+rid,
 			  'Edit Account', 
 			  'width=600, \
 			   height=500, \

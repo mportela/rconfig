@@ -92,10 +92,10 @@
 						<div id="#deviceActionsDiv">
 						<?php
 							/* Instantiate DB Class */
-							$dbA     = new db();
-							$qA      = $dbA->q("SELECT useDefaultCredsManualSet FROM settings WHERE id = '1'");
-							$resultA = mysql_fetch_assoc($qA);
-							$useDefaultCredsManualSet = $resultA['useDefaultCredsManualSet'];
+							//$db     = new db();
+							$q      = $db->q("SELECT useDefaultCredsManualSet FROM settings WHERE id = '1'");
+							$result = mysql_fetch_assoc($q);
+							$useDefaultCredsManualSet = $result['useDefaultCredsManualSet'];
 
 							if ($useDefaultCredsManualSet == '1'){
 								echo '<button id="hideAll" onclick="manualDownloadCreds(\''.$_GET['deviceId'].'\')" tabindex="8" class="smlButton" style="margin-right:5px;margin-top:5px;" title="Begin a manual download of configurations for this device">Manual Download</button>';

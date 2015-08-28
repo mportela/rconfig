@@ -38,11 +38,12 @@
 						$ds = disk_total_space("/");
 						$fs = disk_free_space("/");
 						
-						$q = $db->q("SELECT defaultNodeUsername, defaultNodePassword, defaultNodeEnable, commandDebug, commandDebugLocation, deviceConnectionTimout, ldapServer FROM settings WHERE id = 1");
+						$q = $db->q("SELECT defaultNodeUsername, defaultNodePassword, defaultNodeEnable, useDefaultCredsManualSet, commandDebug, commandDebugLocation, deviceConnectionTimout, ldapServer FROM settings WHERE id = 1");
 						$result = mysql_fetch_assoc($q);
 						$defaultNodeUsername = $result['defaultNodeUsername'];
 						$defaultNodePassword = $result['defaultNodePassword'];
 						$defaultNodeEnable = $result['defaultNodeEnable'];
+						$defaultCredsManualSet = $result['useDefaultCredsManualSet'];
 						$status = $result['commandDebug'];
 						$debugLocation = $result['commandDebugLocation'];
 						$timeout = $result['deviceConnectionTimout'];
@@ -294,7 +295,7 @@
 				
 				    <fieldset id="settings">
 				  <legend>Software & Database Details</legend>
-				  <?php 
+				  <?php
 					$dbNameRes = $db->q('SELECT DATABASE()');
 					$nodesCntRes = $db->q('SELECT count(*) FROM nodes WHERE status = 1');
 
