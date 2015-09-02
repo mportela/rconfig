@@ -22,15 +22,18 @@ class Process
             $this->phpLoggingOnOff();
         } else if (isset($_GET['getPhpLoggingStatus'])) {
             $this->getPhpLoggingStatus();
+        } else if (isset($_GET['defaultCredsManualSet'])) {
+            $this->procDefaultCredsManualSet();
+        } else if (isset($_GET['getDefaultCredsManualSet'])) {
+            $this->getDefaultCredsManualSet();
         }
-        
     } // end process function
     
     
     
     /**
-     * procDebugOnOff - Chnage the debug value in the settings tbl to 1 or 0 to turn
-     device output debugging to on or off respectivley
+     * procDebugOnOff - Change the debug value in the settings table to 1 or 0 to turn
+     device output debugging to on or off respectively
      */
     function procDebugOnOff()
     {
@@ -68,8 +71,8 @@ class Process
 	
 	
 	/**
-     * phpLoggingOnOff - Chnage the php logging value in the settings tbl to 1 or 0 to turn
-     php logging to on or off respectivley
+     * phpLoggingOnOff - Change the php logging value in the settings tbl to 1 or 0 to turn
+     php logging to on or off respectively
      */
     function phpLoggingOnOff()
     {
@@ -104,7 +107,7 @@ class Process
     
     
     /**
-     * procDeviceTimeout - Chnage the device connection timeout value
+     * procDeviceTimeout - Change the device connection timeout value
      */
     function procDeviceTimeout()
     {
@@ -125,7 +128,7 @@ class Process
         
         /* Update successful */
         if ($q) {
-            $response = "<br/><font color='green'>Device Connection Timeout changed sucessfully to " . $timeout . " Seconds</font>";
+            $response = "<br/><font color='green'>Device Connection Timeout changed successfully to " . $timeout . " Seconds</font>";
         }
         /* Update failed */
         else {
@@ -138,7 +141,7 @@ class Process
     }    
 	
 /**
- * procTimeZoneChange - Chnage the device connection timeout value
+ * procTimeZoneChange - Change the server timezone
  */
     function procTimeZoneChange()
     {
@@ -159,7 +162,7 @@ class Process
         
         /* Update successful */
         if ($q) {
-            $response = "<br/><font color='green'>Timezone changed sucessfully to " . $timeZone . "</font>";
+            $response = "<br/><font color='green'>Timezone changed successfully to " . $timeZone . "</font>";
         }
         /* Update failed */
         else {
@@ -172,7 +175,7 @@ class Process
     }
     
     /**
-     * procDeviceTimeout - Chnage the device connection timeout value
+     * getDebugStatus - Change the device debug status
      */
     function getDebugStatus()
     {
@@ -203,7 +206,7 @@ class Process
     }  
     
     /**
-     * getTimeZoneStatus - Chnage the device connection timeout value
+     * getTimeZoneStatus - Change the device connection timeout value
      */
     function getTimeZone()
     {
@@ -231,10 +234,10 @@ class Process
             
             echo json_encode($response);
         }
-    }  
+    }
 	
     /**
-     * procDeviceTimeout - Chnage the device connection timeout value
+     * procDeviceTimeout - Change the device connection timeout value
      */
     function getPhpLoggingStatus()
     {
@@ -262,7 +265,70 @@ class Process
             
             echo json_encode($response);
         }
-    }  
+    }
+	
+    /**
+     * procDefaultCredsManualSet - Change the status for using the default credential set when manually uploading/downloading configs to/from devices
+     */
+    function procDefaultCredsManualSet()
+    {
+        session_start();
+        require_once("../../../classes/db.class.php");
+        require_once("../../../classes/ADLog.class.php");
+        
+        $db  = new db();
+        $log = ADLog::getInstance();
+        
+        if ($_GET['defaultCredsManualSet'] == '1') {
+            $status = "enabled";
+        } else {
+            $status = "disabled";
+        }
+        
+        /* Update settings tbl with new option */
+        // echo $option;
+        $q = $db->q("UPDATE `settings` SET `useDefaultCredsManualSet` = " . $_GET['defaultCredsManualSet']);
+        
+        /* Update successful */
+        if ($q) {
+			if ($_GET['defaultCredsManualSet'] == '1') {
+				$response = "<font color='red'>Default credentials are disabled and individual users will have to input their credentials for manual config uploads & downloads</font>";
+			} else {
+				$response = "<font color='red'>Default credentials are enabled and will be used for manual config uploads & downloads</font>";
+			}
+        }
+        /* Update failed */
+        else {
+            $response = "failed";
+            $log->Warn("Failure: Could not update useDefaultCredsManualSet in DB with MYSQL Error: " . mysql_error() . " (File: " . $_SERVER['PHP_SELF'] . ")");
+        }
+        echo json_encode($response);
+    }
+	
+	/**
+     * getDefaultCredsManualSet - Get value set for using default credentials with manual uploads & downloads
+     */
+    function getDefaultCredsManualSet()
+    {
+        session_start();
+        require_once("../../../classes/db.class.php");
+        require_once("../../../classes/ADLog.class.php");
+        
+        $db  = new db();
+        $log = ADLog::getInstance();
+        
+        if (isset($_GET['getDefaultCredsManualSet'])) {
+            /* Update settings table with new option */
+            // echo $option;
+            $q      = $db->q("SELECT useDefaultCredsManualSet FROM settings WHERE ID = '1'");
+            $result = mysql_fetch_assoc($q);
+            $useDefaultCredsManualSet = $result['useDefaultCredsManualSet'];
+            /* Update successful */
+			$response = $useDefaultCredsManualSet;
+            
+            echo json_encode($response);
+        }
+    }
 	
 	
 }; //end Class

@@ -323,8 +323,7 @@ if (isset($_POST['add'])) {
         }
         
         /* END - UPDATE NEW COLUMN WITH '1' FOR SELECTED NODES/CATEGORIES */
-        
-    }
+	}
 		
             $errors['Success'] = "Added Task Successfully";
             $log->Info("Success: Added Task to DB (File: " . $_SERVER['PHP_SELF'] . ")");

@@ -34,7 +34,7 @@
 					</tr>
 					<tr align="left" valign="top">
 						<td id="leftcell">Prompt</td>
-						<td>The <span class="rconfigNameStyle">rConfig</span> telnet scripts required the actual device privileged exec mode prompt for fast execution of the script. Please input the exec mode prompt include the <b>#</b> symbol for the device. <br/>i.e.  <b>"router1#" </b></td>
+						<td>The <span class="rconfigNameStyle">rConfig</span> Telnet/SSH scripts required the actual device privileged exec mode prompt for fast execution of the script. Please input the exec mode prompt include the <b>#</b> symbol for the device. <br/>i.e.  <b>"router1#" </b></td>
 					</tr>
 					<tr align="left" valign="top">
 						<td id="leftcell">Vendor</td>
@@ -85,7 +85,7 @@
 				<tbody>
 					<tr align="left" valign="top">
 						<td id="leftcell">Username</td>
-						<td>Enter the devices login Username. By clicking the <a href="#">default username/password</a> hyperlink, you will auto populate the Username, Password, Confirm Password, and Enable Password fields with the credentials saved in  the settings page
+						<td>Enter the devices login Username. By clicking the <a href="#">default username/password</a> check box, you will auto populate the Username, Password, Confirm Password, and Enable Password fields with the credentials saved in  the settings page
 						</td>
 					</tr>
 					<tr align="left" valign="top">
@@ -102,7 +102,7 @@
 					</tr>
 					<tr align="left" valign="top">
 						<td id="leftcell">Access Method</td>
-						<td>Enter the devices access method. Choose telnet or SSHv2</td>
+						<td>Enter the devices access method. Choose Telnet or SSHv2</td>
 					</tr>		
 					<tr align="left" valign="top">
 						<td id="leftcell">Connection Port</td>

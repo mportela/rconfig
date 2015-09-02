@@ -64,7 +64,7 @@
 	<div class="break" style="clear:both;"></div>
 	<div class="break" style="clear:both;"></div>
 		<p>
-		The <span class="rconfigNameStyle">Last 5 devices added</span> section shows a list of the last 5 devices added to <span class="rconfigNameStyle">rConfig</span>. You will be able to click the devices name directly to bring you to the devices home page in <span class="rconfigNameStyle">rConfig</span>. The date added and the user who added the device are also shown in this table.
+		The <span class="rconfigNameStyle">Last 5 devices added/modified</span> section shows a list of the last 5 devices added to or modified in <span class="rconfigNameStyle">rConfig</span>. You will be able to click the devices name directly to bring you to the devices home page in <span class="rconfigNameStyle">rConfig</span>. The date added and the user who added the device are also shown in this table.
 		</p>
 	</div>
 </body>

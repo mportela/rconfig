@@ -61,7 +61,14 @@
 						break;	
 					case "compliancepolicyelements.php":
 					echo "Compliance > Policy Elements";
-						break;							
+						break;		
+				/* Template Subpages */
+					case "templategen.php":
+					echo "Template > Template Generator";
+						break;
+					case "templategenconfig.php":
+					echo "Template > Generated Configs";
+						break;					
 				/* Settings Subpages */
 					case "settings.php": 
 					echo "Settings > General Settings";

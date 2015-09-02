@@ -24,7 +24,7 @@ $log = ADLog::getInstance();
 	
 	<title>rConfig - Configuration Management</title>
 	<meta name="description" content="Configuration management utility for CLI based devices">
-	<meta name="copyright" content="Copyright (c) 2012 - rConfig">
+	<meta name="copyright" content="Copyright (c) 2015 - rConfig">
 	<meta name="author" content="Stephen Stack">
 	
 	<!-- Add ICO -->

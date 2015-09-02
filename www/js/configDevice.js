@@ -1,9 +1,8 @@
   $(window).load(function() {
+	pageLoadFunctions();
   // alert(document.URL);
 	var rid = location.search.split('rid=')[1]
-	pageLoadFunctions();
   });
-  
   
 function pageLoadFunctions(){
 	$('#loading').hide();
@@ -17,10 +16,16 @@ function startConfigurationScript(rid){
 	$('#loading').show();
     var e = document.getElementById("snippetSelect");
     var snippetId = e.options[e.selectedIndex].value;
-
+	var username = location.search.split('username=')[1]
+	var password = location.search.split('password=')[1]
+	if ((username == null || username.length === 0 ) && (password == null || password.length === 0)){
+		username = "0"
+		password = "0"
+	}
+	
     $.ajax({
         async: false, // prevent an async call
-        url: 'lib/ajaxHandlers/ajaxConfigDevice.php?rid='+rid+'&snipId='+snippetId,
+        url: 'lib/ajaxHandlers/ajaxConfigDevice.php?rid='+rid+'&snipId='+snippetId+'&username='+username+'&password='+password,
         data: {},
         dataType: "json",
 		 complete: function(){
