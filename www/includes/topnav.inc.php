@@ -250,7 +250,7 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 	</div>
 	<div id="nav2">
 		<ul>
-			<li <?php if($config_page == "settings.php") {echo "class='nav2Selected'";}?>><a href="settings.php">Main Settings</a></li>
+			<li <?php if($config_page == "settings.php") {echo "class='nav2Selected'";}?>><a href="settings.php">General Settings</a></li>
 			<?php
 			// check if logged in user is admin and display next lines
 				if($session->isAdmin()){ ?>
