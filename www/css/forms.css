@@ -127,3 +127,7 @@ margin-left:0px;
 	text-align:left;
 	float:left;
 }
+#noInternetOverride {
+	width:0px;
+	margin-right:10px;
+}

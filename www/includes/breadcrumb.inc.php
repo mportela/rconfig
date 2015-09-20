@@ -83,7 +83,7 @@
 					echo "Settings > Backup";
 						break;
 					case "updater.php":
-					echo "Update";
+					echo "Settings > Update";
 						break;
 				default:
 			echo "<font color=\"red\">Page Title Not Found</font>";			

@@ -21,38 +21,40 @@
 			<!-- Main Content Start-->
 			<fieldset id="dashboardFieldset" style="width:90%; min-height:147px; float:left;">
 				<legend>Update rConfig</legend>
-				
-			
-			<?php 
-			// chk=1 passed form update url. If not passed - Form is not displayed
-			if(isset($_GET['chk']) && $_GET['chk'] == 1){ ?>
 			
 			<div id="updateForm">	
-			<p><strong>rConfig update available</strong> - Please login to www.rconfig.com <a href="http://www.rconfig.com/index.php/download-menu" target="_blank">downloads</a> page and get the latest version of rConfig. 
+			<p><strong>rConfig update page</strong> - Please login to www.rconfig.com <a href="http://www.rconfig.com/index.php/download-menu" target="_blank">downloads</a> page or visit the rConfig GitHub page <a href="https://github.com/v1tal3/rconfig" target="_blank">here</a> and get the latest version of rConfig. 
 			Please create a <a href="settingsBackup.php">system backup</a> before you proceed.</p>	
 			<div class="spacer"></div><br/>
 			<p><strong>Your version: </strong><?php echo $config_version;?></p>	
 			<div class="spacer"></div>
 			<?php 
 			// get latest version online
-			//Setting the timeout properly without messing with ini values: 
+			//Setting the timeout properly without messing with ini values:
 				$ctx        = stream_context_create(array(
 					'http' => array(
 					'timeout' => 5)
 				));
-			$latestVer = file_get_contents("http://www.rconfig.com/downloads/version.txt", 0, $ctx);
+			//$latestVer = file_get_contents("http://www.rconfig.com/downloads/version.txt", 0, $ctx);
+			$latestVer = file_get_contents("https://raw.githubusercontent.com/v1tal3/rconfig/master/version.txt", 0, $ctx);
 			?>
-			<p><strong>Update version: </strong><?php echo $latestVer;?></p>	
+			<p><strong>Latest version: </strong><?php echo $latestVer;?></p>	
 				<div class="spacer">
 				</div>
 				<br/>
+			
 				
 			<!-- begin upload form -->
 			<div class="mainformDiv">
 				<form id="vendorsAdd" method="post" action="lib/crud/updater.crud.php" enctype="multipart/form-data"  class="myform stylizedForm stylized"  style="width:100%;">
 					
+					<?php if($latestVer == ""){?>
+						<input type="checkbox" id="noInternetOverride" name="noInternetOverride" value="1" />Check if this server doesn't have internet access and to override auto-verification that the uploaded file is the latest version.
+						<div class="spacer"></div>
+					<?php } ?>
+					
 					<div style="width:500px; margin-bottom:10px;">
-						
+
 						<label for="updateFile">Update ZIP File:</label>
 						<div class="spacer"></div>
 						<?php if(isset($errors['fileInvalid'])){echo "<span class=\"error\">".$errors['fileInvalid']."</span>";}?> 
@@ -100,12 +102,7 @@
 				</form>
 			</div>
 
-			  </div>	
-			 <?php } else { ?>
-				
-				<p>rConfig update not available at this time</p>
-				
-			 <?php } ?>
+			  </div>
 			</fieldset>
 			
 			

@@ -254,15 +254,11 @@ if($config_page == "dashboard.php") /* check if is dashboard and only display to
 			<?php
 			// check if logged in user is admin and display next lines
 				if($session->isAdmin()){ ?>
-			<li <?php if($config_page == "useradmin.php") {echo "class='nav2Selected'";}?>><a href="useradmin.php">Users (Admin)</a></li>
-			<?php } // End check if logged in user is admin
-			?>
-			<?php
-			// check if logged in user is admin and display next lines
-				if($session->isAdmin()){ ?>
-			<li <?php if($config_page == "settingsBackup.php") {echo "class='nav2Selected'";}?>><a href="settingsBackup.php">System Backup (Admin)</a></li>
-			<?php } // End check if logged in user is admin
-			?> 			
+					<li <?php if($config_page == "useradmin.php") {echo "class='nav2Selected'";}?>><a href="useradmin.php">Users (Admin)</a></li>
+					<li <?php if($config_page == "updater.php") {echo "class='nav2Selected'";}?>><a href="updater.php">System Update (Admin)</a></li>
+					<li <?php if($config_page == "settingsBackup.php") {echo "class='nav2Selected'";}?>><a href="settingsBackup.php">System Backup (Admin)</a></li>
+				<?php } // End check if logged in user is admin
+				?>	
 		</ul>
 	</div>
 </div>

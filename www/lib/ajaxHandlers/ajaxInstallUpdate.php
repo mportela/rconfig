@@ -25,8 +25,9 @@ $update = new updater();
 //Setting the timeout properly without messing with ini values: 
 $ctx = stream_context_create(array('http' => array('timeout' => 5)));
 // here we assume we can already connect to net as ../www/updater.php will not allow us to proceed to this point i.e. no error check
-$latestVer = file_get_contents("http://www.rconfig.com/downloads/version.txt", 0, $ctx);
-$updateFileName = 'rconfig-'.$latestVer.'.zip';
+//$latestVer = file_get_contents("http://www.rconfig.com/downloads/version.txt", 0, $ctx);
+$latestVer = file_get_contents("https://raw.githubusercontent.com/v1tal3/rconfig/master/version.txt", 0, $ctx);
+$updateFileName = 'rconfig-update.zip';
 
 $updateFile = $config_temp_dir . $updateFileName;
 //extracted files path
@@ -35,7 +36,7 @@ $extractDir = '/home/rconfig/tmp/update-'.$latestVer;
 // set json array for ultimate response to updater.php
 $response = array();
 
-// set chwon apache on /home/rconfig/ in case any are misconfigured
+// set chown apache on /home/rconfig/ in case any are misconfigured
 shell_exec('chown -R apache '.$config_app_basedir);
 
 // check if update file exists
@@ -97,7 +98,7 @@ if($update->checkForUpdateFile($updateFile)){
 		$log->Info("Could not remove rConfig update files - (File: " . $_SERVER['PHP_SELF'] . ")");;
 	}
 
-	// remove rconfig/www/install directory as should already be remove for upgrade
+	// remove rconfig/www/install directory as should already be removed for upgrade
 	$installDir = '/home/rconfig/www/install/';
 	if(is_dir($installDir)){
 		rrmdir($installDir);
