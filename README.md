@@ -22,13 +22,14 @@ process. Check for the latest install guides in the support section
 ======================= DOCKER ================================
 
 To build...
-
+```
 # docker build --rm -t <username>/httpd .
+```
 
 To run...
-
+```
 # docker run -d -p 80:80 <username>/httpd
-
+```
 ======================= BUG ===================================
 
 Any bugs can be emailed directly. Send as much detail as possible to 
