@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
 -- Dumping data for table DATABASE_NAME.settings: ~1 rows (approximately)
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
 INSERT INTO `settings` (`id`, `fileSaveChk`, `fileLocation`, `defaultNodeUsername`, `defaultNodePassword`, `defaultNodeEnable`, `commandDebug`, `commandDebugLocation`, `phpErrorLogging`, `phpErrorLoggingLocation`, `deviceConnectionTimout`, `smtpServerAddr`, `smtpFromAddr`, `smtpRecipientAddr`, `smtpAuth`, `smtpAuthUser`, `smtpAuthPass`, `smtpLastTest`, `smtpLastTestTime`) VALUES
-	(1, 1, '/home/rconfig/data/', '', '', '', 0, '/home/rconfig/logs/debugging/', 0, '/home/rconfig/logs/phpLog/', 60, '', '', '', 1, '', '', '', '');
+	(1, 1, '/home/rconfig/data/', '', '', '', 0, '/home/rconfig/logs/debugging/', 0, '/home/rconfig/logs/phpLog/', 60, '', '', '', 1, '', '', '', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 -- Dumping structure for table rconfigdev1.snippets
