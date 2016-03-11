@@ -19,7 +19,18 @@ along with rConfig.  If not, see <http://www.rConfig.com/license.txt/>.
 Guides can be found online at www.rConfig.com to help you through the installation
 process. Check for the latest install guides in the support section
 
+======================= DOCKER ================================
+
+To build...
+
+# docker build --rm -t <username>/httpd .
+
+To run...
+
+# docker run -d -p 80:80 <username>/httpd
+
 ======================= BUG ===================================
 
 Any bugs can be emailed directly. Send as much detail as possible to 
 bugs@rconfig.com
+
